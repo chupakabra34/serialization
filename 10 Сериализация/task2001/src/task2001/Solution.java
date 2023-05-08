@@ -38,6 +38,8 @@ public class Solution {
             somePerson.load(inputStream);
             inputStream.close();
             //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
+            if (ivanov == somePerson)
+                System.out.println(true);
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -82,10 +84,25 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            Writer out = new OutputStreamWriter(outputStream, "UTF8");
+            out.write(name + "\r\n");
+
+            for (Asset item : assets)
+                out.write(item.getName() + "," + item.getPrice() + "\r\n");
+
+            out.close();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
+            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            if (in.ready())
+                name = in.readLine();
+            while (in.ready()) {
+                String s = in.readLine();
+                String[] strs = s.split(",");
+                this.assets.add(new Asset(strs[0]));
+            }
         }
     }
 }

@@ -24,9 +24,9 @@ public class Solution {
     public static void main(String[] args) {
         //исправь outputStream/inputStream в соответствии с путем к твоему реальному файлу
         try {
-            File your_file_name = File.createTempFile("your_file_name", null);
-            OutputStream outputStream = new FileOutputStream(your_file_name);
-            InputStream inputStream = new FileInputStream(your_file_name);
+            File your_file_name = File.createTempFile("2005.txt", null);
+            OutputStream outputStream = new FileOutputStream("2005.txt");
+            InputStream inputStream = new FileInputStream("2005.txt");
 
             Human ivanov = new Human("Ivanov", new Asset("home"), new Asset("car"));
             ivanov.save(outputStream);
@@ -53,13 +53,16 @@ public class Solution {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return false;
+            if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
             Human human = (Human) o;
 
-            if (name == null ? !name.equals(human.name) : human.name != null) return false;
-            return assets != null ? assets.equals(human.assets) : human.assets == null;
+//            if (name == null ? !name.equals(human.name) : human.name != null) return false;
+//            return assets != null ? assets.equals(human.assets) : human.assets == null;
+            if (name == null || !name.equals(human.name)) return false;
+            if (assets == null || !assets.equals(human.assets)) return false;
+            return true;
 
         }
 

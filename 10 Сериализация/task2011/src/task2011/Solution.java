@@ -21,7 +21,7 @@ Requirements:
 
 public class Solution {
 
-    public static class Apartment {
+    public static class Apartment implements Externalizable {
 
         private String address;
         private int year;
@@ -43,6 +43,20 @@ public class Solution {
          */
         public String toString() {
             return ("Address: " + address + "\n" + "Year: " + year);
+        }
+
+        @Override
+        public void writeExternal(ObjectOutput out) throws IOException {
+            out.writeObject(this.address);
+            out.writeInt(this.year);
+            out.close();
+        }
+
+        @Override
+        public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+            this.address = (String) in.readObject();
+            this.year = in.readInt();
+            in.close();
         }
     }
 

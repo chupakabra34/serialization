@@ -6,6 +6,10 @@ public class Asset {
         this.price = price;
     }
 
+    public Asset(String name) {
+        this.name = name;
+    }
+
     private String name;
     private double price;
 
@@ -15,6 +19,10 @@ public class Asset {
 
     public double getPrice() {
         return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override

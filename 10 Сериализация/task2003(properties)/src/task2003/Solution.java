@@ -24,10 +24,22 @@ public class Solution {
 
     public static void save(OutputStream outputStream) throws Exception {
         //напишите тут ваш код
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        Properties properties = new Properties();
+        for (Map.Entry<String, String> map : runtimeStorage.entrySet()) {
+            properties.put(map.getKey(), map.getValue());
+        }
+        properties.store(printWriter, null);
+        printWriter.close();
     }
 
     public static void load(InputStream inputStream) throws IOException {
         //напишите тут ваш код
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        for (String key : properties.stringPropertyNames()) {
+            runtimeStorage.put(key, properties.getProperty(key));
+        }
     }
 
     public static void main(String[] args) {
@@ -37,7 +49,6 @@ public class Solution {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         System.out.println(runtimeStorage);
     }
 }
