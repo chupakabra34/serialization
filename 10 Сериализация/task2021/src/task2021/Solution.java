@@ -17,6 +17,9 @@ Requirements:
 
 public class Solution implements Serializable {
     public static class SubSolution extends Solution {
+        public SubSolution() throws NotSerializableException {
+            throw new NotSerializableException("Oops ... Dont try to save/load this Class!!!");
+        }
     }
 
     public static void main(String[] args) {

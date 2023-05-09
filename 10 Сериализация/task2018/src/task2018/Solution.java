@@ -23,7 +23,7 @@ Requirements:
 5. Программа должна выполняться без ошибок.
 6. При десериализации должны корректно восстанавливаться значение полей nameA и nameB.*/
 
-public class Solution {
+public class Solution implements Serializable {
     public static class A {
 
         protected String nameA = "A";
@@ -31,11 +31,14 @@ public class Solution {
         public A(String nameA) {
             this.nameA += nameA;
         }
+
+        public A() {
+        }
     }
 
     public class B extends A implements Serializable {
 
-        private String nameB;
+        protected String nameB;
 
         public B(String nameA, String nameB) {
             super(nameA);
